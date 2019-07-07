@@ -1,3 +1,4 @@
+"use strict";
 let money, 
 		income = "Фриланс",
 		addExpenses,
@@ -5,7 +6,8 @@ let money,
 		mission = 333333,
 		period,
 		expensesAmount,
-		sum = 0;
+		sum = 0,
+		sum1 = 0;
 
 let start = function(){
 	do{
@@ -22,27 +24,7 @@ let appData = {
 	budgetMonth: 0,
 	expensesMonth: 0,
 	expenses: {},
-	getExpensesMonth: function(){
-	//		expensesAmount = {
-	//			  a: +prompt("Во сколько это обойдется?"),
-	//				b: +prompt("Во сколько это обойдется?")
-	//	}
-	//	let count = 0;
-	//	for(let key in expensesAmount){
-	//		count +=expensesAmount[key];
-	//}		
-	//console.log(count);
-
-	while (isNaN(expensesAmount) || expensesAmount == "" || expensesAmount == null){
-		for(let j = 0; j < 2; j++){
-			
-		expensesAmount = +prompt("Во сколько это обойдется?");
-		sum += expensesAmount;
-		}
-		
-	};
-	return("Сумма всех расходов за месяц: " + (sum));
-},
+	
  getBudget: function(){
   	var accumulatedMonth = money;
   	appData.budgetMonth = (+money) - sum;
@@ -74,20 +56,31 @@ getStatusIncome: function(){
 },
 
 asking: function(){
+	let question, answer;
+	while(isNaN(answer) || answer == "" || answer == null){
 	for(let i = 0; i < 2; i++){
-		let question = prompt("Какие обязательные ежемесячные расходы у вас есть?"),
-		answer = prompt("Во сколько это обойдется?");
+	  question = prompt("Какие обязательные ежемесячные расходы у вас есть?"),
+		answer = +prompt("Во сколько это обойдется?");
 			//console.log(question + " : " + answer);
 			appData.expenses[question] = answer;
 	};
 }
+},
+
+getExpensesMonth: function(){
+	for(let key in appData.expenses){
+		sum1 += appData.expenses[key];
+	}
+	return sum1;
+}
 }
 console.log(appData);	
-console.log(appData.getExpensesMonth());
+
 //console.log(appData.getBudget());
 console.log(appData.getTargetMonth());
 console.log(appData.getStatusIncome());
 appData.asking();
+console.log("Сумма ежемесячных расходов: " + appData.getExpensesMonth() + " евро");
 
 appData.budget = +money;
 //console.log("Ваш месячный доход: " + appData.budget);
