@@ -7,7 +7,7 @@ let money,
 		period,
 		expensesAmount,
 		sum = 0;
-		
+
 let start = function(){
 	do{
 		money = prompt("Ваш месячный доход?");
@@ -51,13 +51,12 @@ getExpensesMonth: function(){
 },
 
 	getTargetMonth: function(){
-	let accumulatedMonth2 = appData.budget - appData.getExpensesMonth();
-	if (accumulatedMonth2 >= 0){
+	if (appData.budgetMonth >= 0){
 		//console.log("Цель будет достигнута");
 	} else {
 		console.log("Цель не будет достигнута");
 	}
-	return("За какой период будет достигнута цель: " + (Math.round(mission / (+accumulatedMonth2))) + " месяцев");
+	return("За какой период будет достигнута цель: " + (Math.round(mission / appData.budgetMonth)) + " месяцев");
 
 },
 
@@ -71,11 +70,7 @@ getStatusIncome: function(){
 	} else if (appData.budgetDay < 0){
 		return("Что-то пошло не так")
 	}
-},
-
-
-
-
+}
 }
 
 appData.budget = +money;
